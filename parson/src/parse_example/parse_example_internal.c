@@ -3,9 +3,6 @@
 
 
 
-// void print_parsed_text(void){
-// 	printf("%s\n", json_parse_string(string_to_parse));
-// }
 
 void print_commits_info(const char *username, const char *repo) {
     JSON_Value *root_value;
@@ -49,25 +46,26 @@ void print_commits_info(const char *username, const char *repo) {
 
 
 
-
-void serialization_example(void) {
+//в этой функции мы создаем объект json, а потом переводим его в читабельную строку
+void serialization_example(void) {//serialization-преобразование объекта в тип данных (у нас в строку)
     JSON_Value *root_value = json_value_init_object();
     JSON_Object *root_object = json_value_get_object(root_value);
+
     char *serialized_string = NULL;
 
     json_object_set_string(root_object, "Battery type", "Li-Ion");//запись идет в переменную формата JSON_Object
     json_object_set_number(root_object, "Voltage", 15);
     // "...dot_set" создает новый объект, элементами которого являются \
     переменные, поставленные через точку. По сути это как структура
-
     json_object_dotset_string(root_object, "address.city", "Cupertino");
+    json_object_dotset_string(root_object, "address.street", "Esenina");
     json_object_dotset_value(root_object, "contact.emails", json_parse_string("[\"email@example.com\",\"email2@example.com\"]"));
 
-    serialized_string = json_serialize_to_string_pretty(root_value);//перевод JSON в строчку
+    serialized_string = json_serialize_to_string_pretty(root_value);//перевод из JSON в строчку
+
 
 
     puts(serialized_string); //вывод строчки на экран
     json_free_serialized_string(serialized_string);
     json_value_free(root_value);
 }
-//serialization-преобразования объекта в тип данных (у нас в строку)
