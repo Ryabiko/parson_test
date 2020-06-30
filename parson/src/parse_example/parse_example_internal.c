@@ -65,7 +65,81 @@ void serialization_example(void) {//serialization-преобразование �
 
 
 
-    puts(serialized_string); //вывод строчки на экран
+    puts(serialized_string); //вывод строчки на экран  
+
+    printf("%s\n------------\n\n", json_object_dotget_string(root_object, "address.city"));//доступ к строчке файла json
+
     json_free_serialized_string(serialized_string);
     json_value_free(root_value);
+
 }
+
+
+
+void persistence_example(void) { //создается файл с данными о пользователе
+    JSON_Value *schema = json_parse_string("{\"name\":\"\"}");
+    JSON_Value *user_data = json_parse_file("user_data.json");
+
+    char buf[256];
+    const char *name = NULL;
+    if (user_data == NULL || json_validate(schema, user_data) != JSONSuccess)//проверка, есть ли такой файл \
+    																		   и есть ли такое поле в нём 
+    {
+        puts("Enter your name:");
+        scanf("%s", buf);
+        user_data = json_value_init_object();
+        json_object_set_string(json_object(user_data), "name", buf);// в значение name объекта user_data  \
+        																ставится значение, лежащее в buf
+        json_serialize_to_file(user_data, "user_data.json");//запись получившегося в файл\
+        													если файла с таким названием нет, он создается
+    }
+
+
+    // json_object_set_string(json_object(user_data), "Age", "20");
+    // json_serialize_to_file(user_data, "new_file.json");
+
+
+    name = json_object_get_string(json_object(user_data), "name");
+    printf("Hello, %s.", name);
+    json_value_free(schema);
+    json_value_free(user_data);
+    return;
+}
+
+void writing_to_file(char * variable, char * value, char * file_name){
+
+	// JSON_Value * data = json_parse_file(file_name);//parse_file если надо посмотреть, есть ли уже данные в файле
+	JSON_Value *data = json_value_init_object();
+
+	json_object_set_string(json_object(data), variable, value);
+	json_serialize_to_file(data, file_name);
+
+	data_string = json_serialize_to_string_pretty(data);//сохранение в глобальную переменную\
+														можно сделать функцию, выдающую строку
+
+	puts(json_serialize_to_string_pretty(json_parse_file(file_name)));
+
+}
+
+void add_to_object(JSON_Object *object, char * variable, char * value){
+	JSON_Value * j_value = NULL;
+
+
+	if (json_object_has_value(object, variable)!= NO_VALUE){
+		json_object_set_string(object, variable, value);
+
+		j_value = json_value_init_object();
+        json_object_set_string(json_object(j_value), variable, value);
+	}
+	// json_serialize_to_file(value, "add_to_object.json");
+
+
+	// puts(object);
+}
+ 
+
+ /*как осуществляется процесс передачи вообще, и ,соответственно, какие методы нам будут нужны: 
+ 1.Можем сохранять в глобальную переменную (что не очень хорошо) 
+ 2.Можем сохранять в файл
+ 
+ Также вопрос, какие данные передаются: фиксированные или каво?*/
