@@ -63,8 +63,6 @@ void serialization_example(void) {//serialization-преобразование �
 
     serialized_string = json_serialize_to_string_pretty(root_value);//перевод из JSON в строчку
 
-
-
     puts(serialized_string); //вывод строчки на экран  
 
     printf("%s\n------------\n\n", json_object_dotget_string(root_object, "address.city"));//доступ к строчке файла json
@@ -94,11 +92,6 @@ void persistence_example(void) { //создается файл с данными
         													если файла с таким названием нет, он создается
     }
 
-
-    // json_object_set_string(json_object(user_data), "Age", "20");
-    // json_serialize_to_file(user_data, "new_file.json");
-
-
     name = json_object_get_string(json_object(user_data), "name");
     printf("Hello, %s.", name);
     json_value_free(schema);
@@ -106,7 +99,7 @@ void persistence_example(void) { //создается файл с данными
     return;
 }
 
-void writing_to_file(char * variable, char * value, char * file_name){
+void writing_to_file(char * variable, char * value, char * file_name){//ДОРАБОТАТЬ ДО ПОПОЛНЕНИЯ ФАЙЛА, А НЕ ЕДИНИЧНЫХ ЗАПИСЕЙ
 
 	// JSON_Value * data = json_parse_file(file_name);//parse_file если надо посмотреть, есть ли уже данные в файле
 	JSON_Value *data = json_value_init_object();
@@ -121,22 +114,22 @@ void writing_to_file(char * variable, char * value, char * file_name){
 
 }
 
-void add_to_object(JSON_Object *object, char * variable, char * value){
-	JSON_Value * j_value = NULL;
 
+void edit_object(char * variable, char * value) {//реализация сохранения в глобальный файл
 
-	if (json_object_has_value(object, variable)!= NO_VALUE){
-		json_object_set_string(object, variable, value);
-
-		j_value = json_value_init_object();
-        json_object_set_string(json_object(j_value), variable, value);
+	JSON_Value *root_value =  json_parse_file("edit_object.json");
+	if (root_value == NULL){
+		root_value = json_value_init_object();
 	}
-	// json_serialize_to_file(value, "add_to_object.json");
+	JSON_Object *root_object = json_value_get_object(root_value);
 
+	json_object_dotset_string(root_object, variable, value);
+    json_serialize_to_file_pretty(root_value, "edit_object.json");
 
-	// puts(object);
 }
- 
+
+//чтобы вести подсчет числа переменных в объекте: json_object_get_count
+
 
  /*как осуществляется процесс передачи вообще, и ,соответственно, какие методы нам будут нужны: 
  1.Можем сохранять в глобальную переменную (что не очень хорошо) 

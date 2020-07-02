@@ -1,6 +1,0 @@
-{
-    "KEY1":"VALUE1",
-    "voltage": "17",
-    "battery_type": "li_ion",
-    "array_of_currents": ["12","14","90"]
-}
