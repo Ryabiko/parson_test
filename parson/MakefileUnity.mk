@@ -19,10 +19,12 @@ UNITY_WARNINGFLAGS = -Wswitch-default
 #UNITY_WARNINGFLAGS += -Wshadow
 SRC_DIRS = \
 	$(PROJECT_HOME_DIR)/src/ \
+	$(PROJECT_HOME_DIR)/src/usable_functions \
 	$(PROJECT_HOME_DIR)/src/parse_example \
 
 TEST_SRC_DIRS = \
 	$(PROJECT_TEST_DIR) \
+	$(PROJECT_TEST_DIR)/usable_functions \
 	$(PROJECT_TEST_DIR)/parse_example \
 	$(UNITY_HOME)/unity \
 	$(UNITY_HOME)/src \
@@ -37,6 +39,7 @@ INCLUDE_DIRS = \
 	$(UNITY_HOME)/extras/fixture/src \
 	$(UNITY_HOME)/extras/fixture/test \
 	$(PROJECT_HOME_DIR)/inc/ \
+	$(PROJECT_HOME_DIR)/inc/usable_functions \
 	$(PROJECT_HOME_DIR)/inc/parse_example \
 
 include $(UNITY_BUILD_HOME)/MakefileWorker.mk

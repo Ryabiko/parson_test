@@ -18,8 +18,7 @@ void edit_object(char * variable, char * value);
 // JSON_Value *global_value = json_value_init_object();;
 // JSON_Object * global_object = json_value_get_object(global_value);
 
-JSON_Object * testing_object;	
-char * data_string;
+
 
 #endif//_PARSE_EXAMPLE_INTERNAL_H_
 

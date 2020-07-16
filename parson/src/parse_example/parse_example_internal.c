@@ -107,7 +107,7 @@ void writing_to_file(char * variable, char * value, char * file_name){//ДОРА
 	json_object_set_string(json_object(data), variable, value);
 	json_serialize_to_file(data, file_name);
 
-	data_string = json_serialize_to_string_pretty(data);//сохранение в глобальную переменную\
+	// data_string = json_serialize_to_string_pretty(data);//сохранение в глобальную переменную\
 														можно сделать функцию, выдающую строку
 
 	puts(json_serialize_to_string_pretty(json_parse_file(file_name)));
@@ -125,7 +125,6 @@ void edit_object(char * variable, char * value) {//реализация сохр
 
 	json_object_dotset_string(root_object, variable, value);
     json_serialize_to_file_pretty(root_value, "edit_object.json");
-
 }
 
 //чтобы вести подсчет числа переменных в объекте: json_object_get_count
