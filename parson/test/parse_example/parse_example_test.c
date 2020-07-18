@@ -55,3 +55,13 @@ TEST (parse_example, add_to_object) {
 
 	TEST_ASSERT_EQUAL_STRING(NULL,"s");
 }
+TEST (parse_example, testing_few_moments){
+	JSON_Value *root_value = json_value_init_object();
+    JSON_Object *root_object = json_value_get_object(root_value);
+
+    char *serialized_string = NULL;
+
+    json_object_set_string(root_object, "Battery type", "Li-Ion");
+
+    
+}

@@ -11,10 +11,14 @@ struct _sys_info{
 } sys_info;
 
 
-struct screen_info{
-	int number_lines;
+struct _screen_info{
+	int lines_quantity;
 	int * cell_1_2;
 };
+
+struct _screen_info main_screen;
+struct _screen_info side_screen;
+
 #endif//_USABLE_FUNCTIONS_INTERNAL_H_
 
 

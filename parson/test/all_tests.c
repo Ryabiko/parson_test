@@ -2,7 +2,7 @@
 
 static void run_all_tests(void) {
 	RUN_TEST_GROUP(usable_functions);
-	// RUN_TEST_GROUP(parse_example);
+	RUN_TEST_GROUP(parse_example);
 }
 
 int main(int argc, const char *argv[])

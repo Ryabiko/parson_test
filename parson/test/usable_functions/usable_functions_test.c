@@ -23,7 +23,7 @@ TEST (usable_functions, checking_screen){
     char * serialized_string = json_serialize_to_string_pretty(screen_value);
     // printf("\nserailized string: %s\n", serialized_string);
 
-	TEST_ASSERT_EQUAL_STRING(sys_info.current_screen, get_screen(serialized_string));
+	TEST_ASSERT_EQUAL_STRING("{\"screen\":\"main\"}", get_screen(serialized_string));
 }
 
 TEST (usable_functions, sent_not_screen_string){
@@ -41,4 +41,7 @@ TEST (usable_functions, sent_not_screen_string){
 
 TEST (usable_functions, work_with_cells){
 
+
+	 
+	TEST_ASSERT_EQUAL_STRING("NOT NULL", NULL);
 }
