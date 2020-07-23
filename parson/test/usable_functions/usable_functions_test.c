@@ -81,7 +81,7 @@ TEST (usable_functions, get_cells){
 }
 
 TEST (usable_functions, get_celll_info){
-
+	
 
 	TEST_ASSERT_EQUAL_INT(2, 0);
 }

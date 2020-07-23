@@ -50,12 +50,13 @@ char * get_main_screen_info(char * incoming_string){ //аналогично дл
 	char *	suitable_symbols = "cels_123456789",
 		 *	incoming_key = get_key_from_str(incoming_string);
 	printf("%s\n", incoming_key);
+	
 	if(json_object_has_value(incoming_object, "lines_quantity") == HAS_VALUE){
-
-		json_object_set_number(incoming_object, "lines_quantity", main_screen.lines_quantity);
+		// char * value = json_serialize_to_string(json_object_dotget_string (incoming_object, "lines_quantity"));//получение значение по имени ключа
+		json_object_set_number(incoming_object, "lines_quantity", main_screen.lines_quantity);//change to function
 		return json_serialize_to_string(incoming_value);
 	}
-	else if(strspn (incoming_string, suitable_symbols) == 8){
+	else if(strspn (incoming_string, suitable_symbols) == 8){//сравнить с тем, что название ключа "cell"
 
     	json_object_set_number(incoming_object, "some_cell", \
     		main_screen.cells[ get_cell(X, incoming_key) ][ get_cell(Y, incoming_key) ]);
